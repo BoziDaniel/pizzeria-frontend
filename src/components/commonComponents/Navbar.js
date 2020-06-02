@@ -8,8 +8,8 @@ const Navbar = () => {
         Pizzas
       </Link>
       <span className="separator"> | </span>
-      <Link className="link" to="/contacts">
-        Contacts
+      <Link className="link" to="/contact">
+        Contact
       </Link>
     </div>
   );
