@@ -7,10 +7,16 @@ const Navbar = () => {
       <Link className="link" to="/">
         Pizzas
       </Link>
+
       <span className="separator"> | </span>
+      
       <Link className="link" to="/contact">
         Contact
       </Link>
+
+      <span className="separator"> | </span>
+
+      <Link className="link" to="/orders/active">Active Orders</Link>
     </div>
   );
 };
