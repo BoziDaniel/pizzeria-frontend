@@ -13,7 +13,8 @@ const Login = () => {
       localStorage.setItem("token", token);
       if (localStorage.getItem("token") !== "") {
         alert("logged in");
-      }
+      }// hibakezelés, ha resp status 403 csináljon valamit
+      
     });
   };
   const updateUsername = (e) => setUsername(e.target.value);
