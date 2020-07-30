@@ -9,10 +9,12 @@ const Login = () => {
     axios.defaults.headers.post["Content-Type"] =
       "application/json;charset=utf-8";
     axios.post("http://localhost:8080/login", creditentials).then((resp) => {
-      const token = resp.headers.authorization;
+      const token = resp.data.token;
+      console.log(resp);
       localStorage.setItem("token", token);
-      if (localStorage.getItem("token") !== "") {
+      if (localStorage.getItem("token") !== "" && localStorage.getItem("token") !== undefined) {
         alert("logged in");
+        console.log(localStorage.getItem("token"));
       }// hibakezelés, ha resp status 403 csináljon valamit
       
     });

@@ -4,9 +4,12 @@ import axios from "axios";
 export const ActiveOrderContext = createContext();
 export const ActiveOrderProvider = (props) => {
   const [ActiveOrders, setActiveOrders] = useState([]);
+  console.log("component fut");
   useEffect(() => {
-    const token = localStorage.getItem("token");
-
+    let token = localStorage.getItem("token");
+    console.log(token);
+    token="Bearer " + token;
+    console.log(token);
     const options = {
       url: "http://localhost:8080/orders/active",
       method: "GET",
