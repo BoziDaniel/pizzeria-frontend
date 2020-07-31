@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Button } from 'antd';
+
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const handleLogin = (e) => {
-    console.log(username, password);
     const creditentials = { username: username, password: password };
     axios.defaults.headers.post["Content-Type"] =
       "application/json;charset=utf-8";
     axios.post("http://localhost:8080/login", creditentials).then((resp) => {
       const token = resp.data.token;
-      console.log(resp);
       localStorage.setItem("token", token);
       if (localStorage.getItem("token") !== "" && localStorage.getItem("token") !== undefined) {
-        alert("logged in");
-        console.log(localStorage.getItem("token"));
+        alert("logged in");        
       }// hibakezelés, ha resp status 403 csináljon valamit
       
     });
@@ -38,12 +37,12 @@ const Login = () => {
           placeholder="password"
           onChange={updatePassword}
         />
-        <input
+        <Button
           id="loginbutton"
           type="button"
           value="login"
           onClick={handleLogin}
-        />
+        >login</Button>
       </form>
     </div>
   );
