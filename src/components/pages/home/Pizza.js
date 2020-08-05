@@ -20,22 +20,7 @@ const Pizza = (props) => {
       <Col span={8}><Button type="primary">Add to cart</Button></Col>
     </Row>
     </Card>
-  </div>
-   
-  
-
-    /*  <div id={props.id}>
-      <div>
-        <img src={require("../../../images/hero.png")} alt="pizza"></img>
-      </div>
-      <div>
-        <h2> {props.name} </h2>
-        <h4>{props.description}</h4>
-      </div>
-      <div>{props.price}</div>
-    </div> */
-
-   
+  </div> 
    
   );
 };
