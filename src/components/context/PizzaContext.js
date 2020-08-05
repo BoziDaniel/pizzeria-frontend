@@ -6,7 +6,7 @@ export const PizzaProvider = (props) => {
   const [pizzas, setPizzas] = useState([]);
 
   useEffect(() => {    
-    axios.get("http://localhost:8080/pizzas/1").then((res) => {
+    axios.get("http://localhost:8080/pizzas?page=1").then((res) => {
       setPizzas(res.data);
     });
   }, []);
