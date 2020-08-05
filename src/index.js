@@ -5,7 +5,7 @@ import 'antd/dist/antd.css';
 
 ReactDOM.render(
   // <React.StrictMode>
-    <App />
+    <App style={{ background: "#f0f0f0", height: "100%"}}/>
   // </React.StrictMode>
   ,
   document.getElementById('root')

@@ -9,8 +9,10 @@ import ActiveOrders from "./components/pages/activeOrders/ActiveOrders";
 
 
 function App() {
+  //sets the backround color to grey;
+  document.body.style = 'background: #f0f0f0';
   return (
-    <div className="App">
+    <div className="App" style={{ background: "#f0f0f0", height: "100%"}}>
       <Router>
         <Route path="/" component={Header} />
         <PizzaProvider>

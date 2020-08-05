@@ -15,7 +15,7 @@ const Home = () => {
   };
 
   return (
-    <div  style={{ background: "#8c8c8c" }} justify="space-around" align="middle">
+    <div  style={{ background: "#f0f0f0" }} justify="space-around" align="middle">
       <Pagination defaultCurrent={page} total={numberOfPizzas} onChange={handlePizzasPageChange} pageSizeOptions={[]} />
       <Pizzas />
       <Pagination defaultCurrent={page} total={numberOfPizzas} onChange={handlePizzasPageChange} pageSizeOptions={["10"]}/>
