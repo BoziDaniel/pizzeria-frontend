@@ -6,22 +6,24 @@ import { ActiveOrderProvider } from "./components/context/ActiveOrderContext";
 import Contact from "./components/pages/contact/Contact";
 import Header from "./components/commonComponents/Header";
 import ActiveOrders from "./components/pages/activeOrders/ActiveOrders";
-
+import { LoginProvider } from "./components/context/LoginContext";
 
 function App() {
   //sets the backround color to grey;
-  document.body.style = 'background: #f0f0f0';
+  document.body.style = "background: #f0f0f0";
   return (
-    <div className="App" style={{ background: "#f0f0f0", height: "100%"}}>
+    <div className="App" style={{ background: "#f0f0f0", height: "100%" }}>
       <Router>
-        <Route path="/" component={Header} />
-        <PizzaProvider>
-          <Route exact path="/" component={Home} />
-        </PizzaProvider>
-        <Route path="/contact" component={Contact} />
-        <ActiveOrderProvider>
-          <Route path="/orders/active" component={ActiveOrders} />
-        </ActiveOrderProvider>
+        <LoginProvider>
+          <Route path="/" component={Header} />
+          <PizzaProvider>
+            <Route exact path="/" component={Home} />
+          </PizzaProvider>
+          <Route path="/contact" component={Contact} />
+          <ActiveOrderProvider>
+            <Route path="/orders/active" component={ActiveOrders} />
+          </ActiveOrderProvider>
+        </LoginProvider>
       </Router>
     </div>
   );

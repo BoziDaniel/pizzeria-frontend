@@ -7,7 +7,6 @@ export const PizzaProvider = (props) => {
   const [page, setPage] = useState(1);
   const [numberOfPizzas, setNumberOfPizzas] = useState([]);
 
-  //useEffect(() => {}, [page]);
 
   useEffect(() => {    
     
