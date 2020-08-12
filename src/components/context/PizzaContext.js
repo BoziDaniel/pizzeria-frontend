@@ -12,7 +12,6 @@ export const PizzaProvider = (props) => {
     
     axios.get("http://localhost:8080/pizzas?page="+page).then((res) => {
       setPizzas(res.data);
-      console.log(page);
     });
   }, [page]);
 

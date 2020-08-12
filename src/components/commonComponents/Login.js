@@ -48,7 +48,9 @@ const Login = () => {
           login
         </Button>
       </form>
-      Logged in as {LoggedInAsRole.substring(5)}
+      {LoggedInAsRole === ""
+      ? "Logged in as anonimus user"
+      : 'Logged in as ' + LoggedInAsRole.substring(5)}
     </div>
   );
 };
