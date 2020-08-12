@@ -1,8 +1,10 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
 import axios from "axios";
+import {LoginContext} from "./LoginContext"
 
 export const ActiveOrderContext = createContext();
 export const ActiveOrderProvider = (props) => {
+  const { LoggedInAsRole } = useContext(LoginContext);
   const [ActiveOrders, setActiveOrders] = useState([]);
   useEffect(() => {
     let token = localStorage.getItem("token");
@@ -18,7 +20,7 @@ export const ActiveOrderProvider = (props) => {
     axios(options).then((resp) => {
       setActiveOrders(resp.data);
     });
-  }, []);
+  }, [LoggedInAsRole]);
   return (
     <ActiveOrderContext.Provider value={{ ActiveOrders, setActiveOrders }}>
       {props.children}

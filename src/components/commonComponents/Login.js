@@ -13,9 +13,6 @@ const Login = () => {
       "application/json;charset=utf-8";
     axios.post("http://localhost:8080/login", creditentials).then((resp) => {
       setLoggedInAsRole(resp.data.roles[0]);
-      // console.log(resp.data.roles[0]);
-
-      console.log(LoggedInAsRole);
       const token = resp.data.token;
       localStorage.setItem("token", token);
       if (localStorage.getItem("token") !== "") {
@@ -51,7 +48,7 @@ const Login = () => {
           login
         </Button>
       </form>
-      Logged in as {LoggedInAsRole}
+      Logged in as {LoggedInAsRole.substring(5)}
     </div>
   );
 };
