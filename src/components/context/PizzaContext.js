@@ -18,7 +18,6 @@ export const PizzaProvider = (props) => {
   useEffect(() => {    
     axios.get("http://localhost:8080/pizzas/numberOfPizzas").then((res) => {
       setNumberOfPizzas(res.data);
-      console.log(res);      
     });
   }, []);
 

@@ -6,11 +6,9 @@ const ActiveOrders = () => {
   useEffect(() => {}, [ActiveOrders]);
   return (
     <div>
-      <div>
         {ActiveOrders.map((order) => (
             <Order key={order.id} order={order} />
         ))}
-      </div>
     </div>
   );
 };
