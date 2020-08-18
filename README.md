@@ -14,13 +14,13 @@ Based on the authenticated role front-end shows different information, for examp
 
 ## Used technologies
 
-React
-Ant design
+- React
+- Ant design
 
 ## Install & Run
 
-to install:`npm install`
-to start: `npm start`
+- to install:`npm install`
+- to start: `npm start`
 
 ## Backend repository
 
