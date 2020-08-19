@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Card, Button } from "antd";
 import CartContext from "../../context/CartContext";
 import Cartitem from "./CartItem";
@@ -6,6 +6,8 @@ import Cartitem from "./CartItem";
 const Cart = () => {
   const { cartItems } = useContext(CartContext);
   // const { sum } = useContext(CartContext);
+  useEffect(() => {
+  }, [cartItems]);
   return (
     <Card
       title="Cart"
