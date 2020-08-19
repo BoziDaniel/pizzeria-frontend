@@ -6,38 +6,33 @@ const Pizza = (props) => {
   const { cartItems, setCartItems } = useContext(CartContext);
   const handleAddToCart = () => {
     let found = false;
-    for (let item of cartItems) {
-      if (item.id === 500) {
-        let dummy = {
-          id: 500,
-          name: "Songoku",
-          quantity: item.quantity + 1,
-          price: 3000,
+    let newCartItems = [];
+    for (let index = 0; index < cartItems.length; index++) {
+      if (cartItems[index].id === props.id) {
+        let pizzaWithIncreasedAmount = {
+          id: props.id,
+          name: props.name,
+          description: props.description,
+          quantity: cartItems[index].quantity + 1,
+          price: props.price,
         };
-        item = dummy;
-      
+        newCartItems = [...newCartItems, pizzaWithIncreasedAmount];
         found = true;
-        let newerCartItems = [];
-        for (let stuff of cartItems) {
-          if (stuff.id === 500) {
-            newerCartItems = [...newerCartItems, dummy];
-          } else {
-            newerCartItems = [...newerCartItems, stuff];
-          }
-        }
-        setCartItems(newerCartItems);
+      } else {
+        newCartItems.push(cartItems[index]);
       }
     }
+    setCartItems(newCartItems);
     if (!found) {
-      let dummy = {
-        id: 500,
-        name: "Songoku",
+      console.log("not found");
+      let newCartItem = {
+        id: props.id,
+        name: props.name,
+        description: props.description,
         quantity: 1,
-        price: 3000,
+        price: props.price,
       };
-      let newCartItems = [...cartItems, dummy];
-
-      setCartItems(newCartItems);
+      setCartItems([...cartItems, newCartItem]);
     }
   };
   return (
