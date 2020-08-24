@@ -7,7 +7,9 @@ import { LoginContext } from "../context/LoginContext";
 
 const Header = () => {
   const { LoggedInAsRole } = useContext(LoginContext);
-  useEffect(() => {}, [LoggedInAsRole]);
+  useEffect(() => {
+    
+  }, [LoggedInAsRole]);
   return (
     <div style={{ background: "#d4b106" }}>
       <h1>PizzaShop</h1>

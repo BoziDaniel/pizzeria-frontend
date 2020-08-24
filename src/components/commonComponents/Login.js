@@ -15,7 +15,7 @@ const Login = () => {
       setLoggedInAsRole(resp.data.roles[0]);
       const token = resp.data.token;
       sessionStorage.setItem("token", token);
-      
+      sessionStorage.setItem("role", resp.data.roles[0]);
       if (sessionStorage.getItem("token") !== "") {
         alert("logged in");
       } // Error handling missing, what happens if i get 403, etc.

@@ -7,6 +7,7 @@ const Logout = () => {
 
   const handleLogout = (e) => {
     sessionStorage.removeItem("token");
+    sessionStorage.removeItem("role");
     setLoggedInAsRole("");    
     alert("logout");
     
