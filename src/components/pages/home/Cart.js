@@ -5,9 +5,10 @@ import Cartitem from "./CartItem";
 
 const Cart = () => {
   const { cartItems } = useContext(CartContext);
-  // const { sum } = useContext(CartContext);
+  const { sumPrice } = useContext(CartContext);
   useEffect(() => {
   }, [cartItems]);
+    
   return (
     <Card
       title="Cart"
@@ -23,7 +24,7 @@ const Cart = () => {
         <Cartitem item={item} key={item.id} style={{}} />
       ))}
       <p style={{ marginTop: "5px" }}>
-        <b>Sum: 6000 HUF</b>
+        <b>Sum: {sumPrice} HUF</b>
       </p>
       <Button type="primary">Order</Button>
     </Card>

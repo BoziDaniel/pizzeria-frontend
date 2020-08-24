@@ -25,7 +25,7 @@ const Order = (props) => {
   return (
     <Card style={{ marginTop: "5px" }}>
       <Row id={order.id}>
-        <Col span={3}>
+        <Col span={4}>
           <Row>
             <span style={{ fontWeight: "bold", paddingRight: "4px" }}>
               Order id:

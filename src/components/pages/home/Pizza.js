@@ -24,7 +24,6 @@ const Pizza = (props) => {
     }
     setCartItems(newCartItems);
     if (!found) {
-      console.log("not found");
       let newCartItem = {
         id: props.id,
         name: props.name,
