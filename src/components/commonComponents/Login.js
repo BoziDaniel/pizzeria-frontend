@@ -6,7 +6,7 @@ import { LoginContext } from "../context/LoginContext";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { LoggedInAsRole, setLoggedInAsRole } = useContext(LoginContext);
+  const { setLoggedInAsRole } = useContext(LoginContext);
   const handleLogin = (e) => {
     const creditentials = { username: username, password: password };
     axios.defaults.headers.post["Content-Type"] =

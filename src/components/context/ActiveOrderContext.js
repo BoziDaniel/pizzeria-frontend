@@ -21,6 +21,8 @@ export const ActiveOrderProvider = (props) => {
       axios(options).then((resp) => {
         setActiveOrders(resp.data);
       });
+    } else{
+      setActiveOrders([]);
     }
   }, [LoggedInAsRole]);
   return (

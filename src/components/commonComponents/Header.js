@@ -7,9 +7,7 @@ import { LoginContext } from "../context/LoginContext";
 
 const Header = () => {
   const { LoggedInAsRole } = useContext(LoginContext);
-  useEffect(() => {
-    console.log("header refreshed")
-  }, [LoggedInAsRole]);
+  useEffect(() => {}, [LoggedInAsRole]);
   return (
     <div style={{ background: "#d4b106" }}>
       <h1>PizzaShop</h1>
@@ -18,9 +16,7 @@ const Header = () => {
           <Navbar />
         </Col>
         <Col>
-          <div >
-             {LoggedInAsRole === "" ? <Login /> : <Logout />}
-          </div>
+          <div>{LoggedInAsRole === "" ? <Login /> : <Logout />}</div>
         </Col>
       </Row>
     </div>

@@ -6,8 +6,8 @@ const Logout = () => {
   const { LoggedInAsRole, setLoggedInAsRole } = useContext(LoginContext);
 
   const handleLogout = (e) => {
-    setLoggedInAsRole("");
     sessionStorage.removeItem("token");
+    setLoggedInAsRole("");    
     alert("logout");
     
   };

@@ -3,9 +3,7 @@ import React, { createContext, useState, useEffect } from "react";
 export const LoginContext = createContext();
 export const LoginProvider = (props) => {
   const [LoggedInAsRole, setLoggedInAsRole] = useState("");
-  useEffect(() => {
-     console.log("Role in context: " + LoggedInAsRole);
-  }, [LoggedInAsRole]);
+  useEffect(() => {}, [LoggedInAsRole]);
 
   return (
     <LoginContext.Provider value={{ LoggedInAsRole, setLoggedInAsRole }}>
