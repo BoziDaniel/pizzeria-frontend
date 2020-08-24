@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Login from "./Login";
 import Logout from "./Logout";
 import Navbar from "./Navbar";
@@ -6,7 +6,10 @@ import { Row, Col } from "antd";
 import { LoginContext } from "../context/LoginContext";
 
 const Header = () => {
-  const { LoggedInAsRole, setLoggedInAsRole } = useContext(LoginContext);
+  const { LoggedInAsRole } = useContext(LoginContext);
+  useEffect(() => {
+    console.log("header refreshed")
+  }, [LoggedInAsRole]);
   return (
     <div style={{ background: "#d4b106" }}>
       <h1>PizzaShop</h1>
@@ -16,7 +19,7 @@ const Header = () => {
         </Col>
         <Col>
           <div >
-            {LoggedInAsRole === "" ? <Login /> : <Logout />}
+             {LoggedInAsRole === "" ? <Login /> : <Logout />}
           </div>
         </Col>
       </Row>

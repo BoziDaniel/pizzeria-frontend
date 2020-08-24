@@ -6,7 +6,9 @@ const Logout = () => {
   const { LoggedInAsRole, setLoggedInAsRole } = useContext(LoginContext);
 
   const handleLogout = (e) => {
+    setLoggedInAsRole("");
     alert("logout");
+    
   };
   return (
       <Row>
@@ -17,7 +19,7 @@ const Logout = () => {
             alignItems: "center",
           }}
         >
-          {"Logged in as " + LoggedInAsRole.substring(5)}
+          {LoggedInAsRole!==null? "Logged in as " + LoggedInAsRole.substring(5):"not logged in"}
         </Col>
         <Col>
           <Button

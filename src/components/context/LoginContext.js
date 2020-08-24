@@ -4,6 +4,7 @@ export const LoginContext = createContext();
 export const LoginProvider = (props) => {
   const [LoggedInAsRole, setLoggedInAsRole] = useState("");
   useEffect(() => {
+     console.log("Role in context: " + LoggedInAsRole);
   }, [LoggedInAsRole]);
 
   return (

@@ -15,6 +15,7 @@ const Login = () => {
       setLoggedInAsRole(resp.data.roles[0]);
       const token = resp.data.token;
       localStorage.setItem("token", token);
+      
       if (localStorage.getItem("token") !== "") {
         alert("logged in");
       } // Error handling missing, what happens if i get 403, etc.
