@@ -8,7 +8,7 @@ export const ActiveOrderProvider = (props) => {
   const [ActiveOrders, setActiveOrders] = useState([]);
   useEffect(() => {
     if (LoggedInAsRole !== "") {
-      let token = localStorage.getItem("token");
+      let token = sessionStorage.getItem("token");
       token = "Bearer " + token;
       const options = {
         url: "http://localhost:8080/orders/active",
