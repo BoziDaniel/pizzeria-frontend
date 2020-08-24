@@ -1,22 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Button } from "antd";
 
 const Navbar = () => {
   return (
     <div>
       <Link className="link" to="/">
-        Pizzas
+        <Button size={"large"}><b>Pizzas</b></Button>
       </Link>
 
-      <span className="separator"> | </span>
-      
       <Link className="link" to="/contact">
-        Contact
+        <Button  size={"large"}><b>Contact</b></Button>
       </Link>
 
-      <span className="separator"> | </span>
-
-      <Link className="link" to="/orders/active">Active Orders</Link>
+      <Link className="link" to="/orders/active">
+        <Button  size={"large"}><b>Active Orders</b></Button>
+      </Link>
     </div>
   );
 };

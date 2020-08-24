@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-import { Button } from "antd";
+import { Button, Input, Row, Col } from "antd";
 import { LoginContext } from "../context/LoginContext";
 
 const Login = () => {
@@ -25,32 +25,46 @@ const Login = () => {
   return (
     <div id="login">
       <form action="/login" method="post">
-        <input
-          id="username"
-          type="text"
-          required
-          placeholder="username"
-          onChange={updateUsername}
-        />
-        <input
-          id="password"
-          type="password"
-          required
-          placeholder="password"
-          onChange={updatePassword}
-        />
-        <Button
-          id="loginbutton"
-          type="button"
-          value="login"
-          onClick={handleLogin}
-        >
-          login
-        </Button>
+        <Input.Group size="default">
+          <Row gutter={8}>
+            <Col>
+              <Input
+                size="default"
+                maxLength={"50"}
+                style={{ marginLeft: 10, marginRight: 5 }}
+                id="username"
+                type="text"
+                required
+                placeholder="username"
+                onChange={updateUsername}
+              />
+            </Col>
+            <Col>
+              <Input
+                size="default"
+                style={{ marginLeft: 5, marginRight: 5 }}
+                id="password"
+                type="password"
+                required
+                placeholder="password"
+                onChange={updatePassword}
+              />
+            </Col>
+            <Col>
+              <Button
+                size="default"
+                style={{ marginLeft: 5, marginRight: 5 }}
+                id="loginbutton"
+                type="button"
+                value="login"
+                onClick={handleLogin}
+              >
+                <b>login</b>
+              </Button>
+            </Col>
+          </Row>
+        </Input.Group>
       </form>
-      {LoggedInAsRole === ""
-      ? "Logged in as anonimus user"
-      : 'Logged in as ' + LoggedInAsRole.substring(5)}
     </div>
   );
 };
