@@ -3,11 +3,12 @@ import Pizzas from "./Pizzas";
 import { Pagination, Row, Col } from "antd";
 import PizzaContext from "../../context/PizzaContext";
 import Cart from "./Cart";
+import { LoginContext } from "../../context/LoginContext";
 
 const Home = () => {
   const { page, setPage } = useContext(PizzaContext);
   const { numberOfPizzas } = useContext(PizzaContext);
-
+  const { LoggedInAsRole } = useContext(LoginContext);
   const handlePizzasPageChange = (value) => {
     setPage(value);
   };
@@ -31,9 +32,8 @@ const Home = () => {
           style={{ marginBottom: "10px" }}
           />
       </Col>
-      <Col span={4} align="top">
-        <Cart />
-      </Col>
+      {LoggedInAsRole !== ""?<Col span={4} align="top"><Cart /></Col> : null}
+      
     </Row>
   );
 };
