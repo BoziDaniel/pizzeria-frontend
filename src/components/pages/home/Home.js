@@ -30,10 +30,13 @@ const Home = () => {
           onChange={handlePizzasPageChange}
           pageSizeOptions={["10"]}
           style={{ marginBottom: "10px" }}
-          />
+        />
       </Col>
-      {LoggedInAsRole === "ROLE_CUSTOMER"?<Col span={4} align="top"><Cart /></Col> : null}
-      
+      {LoggedInAsRole === "ROLE_CUSTOMER" ? (
+        <Col span={4} align="top">
+          <Cart />
+        </Col>
+      ) : null}
     </Row>
   );
 };

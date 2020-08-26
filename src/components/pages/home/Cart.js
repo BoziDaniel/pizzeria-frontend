@@ -5,7 +5,7 @@ import Cartitem from "./CartItem";
 import axios from "axios";
 
 const Cart = () => {
-  const { cartItems } = useContext(CartContext);
+  const { cartItems, setCartItems } = useContext(CartContext);
   const { sumPrice } = useContext(CartContext);
   const convertToOrderDTO = (item) => {
     return { id: item.id, quantity: item.quantity };
@@ -26,7 +26,14 @@ const Cart = () => {
       },
       data: order,
     };
-    axios(options).then((resp) => console.log(resp));
+    axios(options).then((resp) => {
+      if (resp.status === 200) {
+        alert("successful order");
+        setCartItems([])
+      } else {
+        alert(resp.status + " error during order");
+      }
+    });
   };
   useEffect(() => {}, [cartItems]);
 
@@ -47,9 +54,13 @@ const Cart = () => {
       <p style={{ marginTop: "5px" }}>
         <b>Sum: {sumPrice} HUF</b>
       </p>
-      <Button onClick={handleOrderPizzas} type="primary">
-        Order
-      </Button>
+
+      
+      {cartItems.length !== 0 ? (
+        <Button onClick={handleOrderPizzas} type="primary">
+          Order
+        </Button>
+      ) : null}
     </Card>
   );
 };
