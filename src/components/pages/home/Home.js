@@ -32,7 +32,8 @@ const Home = () => {
           style={{ marginBottom: "10px" }}
           />
       </Col>
-      {LoggedInAsRole !== ""?<Col span={4} align="top"><Cart /></Col> : null}
+      {console.log(LoggedInAsRole)}
+      {LoggedInAsRole === "ROLE_CUSTOMER"?<Col span={4} align="top"><Cart /></Col> : null}
       
     </Row>
   );
