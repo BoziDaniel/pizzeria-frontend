@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import { Card, Row, Col, Button } from "antd";
 import CartContext from "../../context/CartContext";
-
+import LoginContext from "../../context/LoginContext";
 const Pizza = (props) => {
   const { cartItems, setCartItems } = useContext(CartContext);
+  const { LoggedInAsRole } = useContext(LoginContext);
   const handleAddToCart = () => {
     let found = false;
     let newCartItems = [];
@@ -54,11 +55,14 @@ const Pizza = (props) => {
               {props.description}
             </Row>
           </Col>
-          <Col span={4}>
-            <Button type="primary" onClick={handleAddToCart}>
-              Add to cart
-            </Button>
-          </Col>
+
+          {LoggedInAsRole === "ROLE_CUSTOMER" ? (
+            <Col span={4}>
+              <Button type="primary" onClick={handleAddToCart}>
+                Add to cart
+              </Button>
+            </Col>
+          ) : null}
         </Row>
       </Card>
     </div>
