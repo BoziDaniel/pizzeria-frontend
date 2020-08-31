@@ -4,6 +4,7 @@ import { Row, Col, Card, Progress } from "antd";
 import { LoginContext } from "../../context/LoginContext";
 import CookReadyButton from "./orderControls/CookReadyButton";
 import PizzaIsDeliveredButton from "./orderControls/PizzaIsDeliveredButton";
+import ManagerAssignCookDropdown from "./orderControls/ManagerAssignCookDropdown";
 const Order = (props) => {
   const { LoggedInAsRole } = useContext(LoginContext);
   const order = props.order;
@@ -71,6 +72,9 @@ const Order = (props) => {
           ) : null}
           {LoggedInAsRole === "ROLE_DELIVERYGUY" ? (
             <PizzaIsDeliveredButton id={order.id} />
+          ) : null}
+          {LoggedInAsRole === "ROLE_MANAGER" ? (
+            <ManagerAssignCookDropdown cooks={props.cooks} />
           ) : null}
         </Col>
       </Row>
