@@ -73,8 +73,8 @@ const Order = (props) => {
           {LoggedInAsRole === "ROLE_DELIVERYGUY" ? (
             <PizzaIsDeliveredButton id={order.id} />
           ) : null}
-          {LoggedInAsRole === "ROLE_MANAGER" ? (
-            <ManagerAssignCookDropdown cooks={props.cooks} />
+          {LoggedInAsRole === "ROLE_MANAGER" && order.orderStatus === 'ORDERED'? (
+            <ManagerAssignCookDropdown cooks={props.cooks} orderId={order.id} />
           ) : null}
         </Col>
       </Row>

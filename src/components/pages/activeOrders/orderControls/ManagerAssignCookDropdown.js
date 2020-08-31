@@ -1,23 +1,45 @@
-import React from "react";
-import { Menu, Dropdown, message } from "antd";
+import React, { useContext } from "react";
+import { Menu, Dropdown } from "antd";
 import { DownOutlined } from "@ant-design/icons";
-const ManagerAssignCookDropdown = () => {
+import { WorkerContext } from "../../../context/WorkerContext";
+import axios from 'axios';
+
+const ManagerAssignCookDropdown = (props) => {
+  const { cooks } = useContext(WorkerContext);
   const onClick = ({ key }) => {
-    message.info(`Click on item ${key}`);
+    let token = sessionStorage.getItem("token");
+    token = "Bearer " + token;
+    const options = {
+      url: "http://localhost:8080/orders/assignCook/"+props.orderId,
+      method: "PUT",
+      headers: {
+        Authorization: token,
+        "Content-Type": "application/json",
+      },
+      data: key,
+    };
+    axios(options).then((resp) => {
+      if (resp.status === 200) {
+        alert("succesfulli assigned cook")
+      } else {
+        alert(resp.status + " error during assigning cook");
+      }
+    });
+
   };
   const menu = (
     <Menu onClick={onClick}>
-      <Menu.Item key="1">1st menu item</Menu.Item>
-      <Menu.Item key="2">2nd memu item</Menu.Item>
-      <Menu.Item key="3">3rd menu item</Menu.Item>
+      { cooks.map((cook)=>(
+        <Menu.Item key={cook.id}>{cook.username}</Menu.Item>
+      )) }
     </Menu>
   );
   return (
     <div>
       <Dropdown overlay={menu}>
-        <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
+        <p className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
           Assign order to Cook <DownOutlined />
-        </a>
+        </p>
       </Dropdown>
     </div>
   );
