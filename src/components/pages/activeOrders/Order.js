@@ -5,6 +5,7 @@ import { LoginContext } from "../../context/LoginContext";
 import CookReadyButton from "./orderControls/CookReadyButton";
 import PizzaIsDeliveredButton from "./orderControls/PizzaIsDeliveredButton";
 import ManagerAssignCookDropdown from "./orderControls/ManagerAssignCookDropdown";
+import ManagerAssignDeliveryDropdown from "./orderControls/ManagerAssignDeliveryDropdown";
 const Order = (props) => {
   const { LoggedInAsRole } = useContext(LoginContext);
   const order = props.order;
@@ -73,8 +74,16 @@ const Order = (props) => {
           {LoggedInAsRole === "ROLE_DELIVERYGUY" ? (
             <PizzaIsDeliveredButton id={order.id} />
           ) : null}
-          {LoggedInAsRole === "ROLE_MANAGER" && order.orderStatus === 'ORDERED'? (
+          {LoggedInAsRole === "ROLE_MANAGER" &&
+          order.orderStatus === "ORDERED" ? (
             <ManagerAssignCookDropdown cooks={props.cooks} orderId={order.id} />
+          ) : null}
+          {LoggedInAsRole === "ROLE_MANAGER" &&
+          order.orderStatus === "READY" ? (
+            <ManagerAssignDeliveryDropdown
+              deliveryGuys={props.deliveryGuys}
+              orderId={order.id}
+            />
           ) : null}
         </Col>
       </Row>
