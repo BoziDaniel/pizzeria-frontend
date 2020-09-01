@@ -53,7 +53,7 @@ const Order = (props) => {
                 {order.cook !== null ? (
                   order.cook.username
                 ) : (
-                  <div style={{ color: '#ffa39e' }}>not assigned</div>
+                  "not assigned"
                 )}
               </Row>
               <Row>
@@ -63,7 +63,7 @@ const Order = (props) => {
                 {order.deliveryGuy !== null ? (
                   order.deliveryGuy.username
                 ) : (
-                  <span>not assigned</span>
+                  "not assigned"
                 )}
               </Row>
             </div>
