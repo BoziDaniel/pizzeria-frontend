@@ -1,14 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Card, Button } from "antd";
+import React, { useContext, useEffect } from "react";
+import { Card } from "antd";
 import CartContext from "../../context/CartContext";
 import Cartitem from "./CartItem";
-import axios from "axios";
 import ConfirmationModal from "./ConfirmationModal";
 
 const Cart = () => {
-  const { cartItems, setCartItems } = useContext(CartContext);
+  const { cartItems } = useContext(CartContext);
   const { sumPrice } = useContext(CartContext);
-    
+
   useEffect(() => {}, [cartItems]);
 
   return (
@@ -29,15 +28,7 @@ const Cart = () => {
         <b>Sum: {sumPrice} HUF</b>
       </p>
 
-      
-      {cartItems.length !== 0 ? (
-        
-          
-        <ConfirmationModal/>
-        
-    
-        
-      ) : null}
+      {cartItems.length !== 0 ? <ConfirmationModal /> : null}
     </Card>
   );
 };

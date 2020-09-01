@@ -1,16 +1,27 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Modal, Card, Button } from "antd";
+import React, { useContext, useState } from "react";
+import { Modal, Button } from "antd";
 import CartContext from "../../context/CartContext";
 import AddressForm from "./AddressForm";
 import axios from "axios";
 
-const ConfirmationModal = (props) => {
+const ConfirmationModal = () => {
   const [city, setCity] = useState("");
   const [street, setStreet] = useState("");
   const [postalCode, setPostalCode] = useState("");
   const [streetNumber, setStreetNumber] = useState("");
   const [comment, setComment] = useState("");
   const [visible, setVisible] = useState(false);
+
+  const createAddress = () => {
+    const address = {
+      city: city,
+      street: street,
+      postalCode: postalCode,
+      streetNumber: streetNumber,
+      comment: comment,
+    };
+    return address;
+  };
   const [ModalText, setModalText] = useState(
     <AddressForm
       city={city}
@@ -37,10 +48,12 @@ const ConfirmationModal = (props) => {
   };
 
   const handleOk = () => {
-    let order = { incomingOrderedPizzas: [] };
+    const address = createAddress();
+    let order = { incomingOrderedPizzas: [], address: address };
     for (let item of cartItems) {
       order.incomingOrderedPizzas.push(convertToOrderDTO(item));
     }
+    console.log(order);
     let token = sessionStorage.getItem("token");
     token = "Bearer " + token;
     const options = {
@@ -87,7 +100,7 @@ const ConfirmationModal = (props) => {
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
       >
-        <p>{ModalText}</p>
+        {ModalText}
       </Modal>
     </div>
   );

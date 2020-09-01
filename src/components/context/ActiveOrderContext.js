@@ -7,7 +7,6 @@ export const ActiveOrderProvider = (props) => {
   const { LoggedInAsRole } = useContext(LoginContext);
   const [ActiveOrders, setActiveOrders] = useState([]);
   useEffect(() => {
-    console.log("activeorders useeffect runs");
     if (LoggedInAsRole !== "") {
       let token = sessionStorage.getItem("token");
       token = "Bearer " + token;
