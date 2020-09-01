@@ -34,7 +34,6 @@ export const WorkerProvider = (props) => {
       };
       axios(options2).then((res) => {
         setDeliveryGuys(res.data);
-        console.log(res.data);
       });
     }
   }, [LoggedInAsRole]);

@@ -43,6 +43,32 @@ const Order = (props) => {
             </span>
             {order.customer.id}
           </Row>
+          {LoggedInAsRole === "ROLE_MANAGER" ? (
+            <div>
+              <Row>
+                <span style={{ fontWeight: "bold", paddingRight: "4px" }}>
+                  Assigned Cook:{" "}
+                </span>
+                {console.log(order)}
+                {order.cook !== null ? (
+                  order.cook.username
+                ) : (
+                  <div style={{ color: '#ffa39e' }}>not assigned</div>
+                )}
+              </Row>
+              <Row>
+                <span style={{ fontWeight: "bold", paddingRight: "4px" }}>
+                  Assigned DeliveryGuy:{" "}
+                </span>
+                {order.deliveryGuy !== null ? (
+                  order.deliveryGuy.username
+                ) : (
+                  <span>not assigned</span>
+                )}
+              </Row>
+            </div>
+          ) : null}
+
           <Row>
             <span style={{ fontWeight: "bold", paddingRight: "4px" }}>
               Order Status:{" "}
