@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Modal, Button } from "antd";
+import RegistrationForm from "./RegistrationForm";
 
 
 const RegistrationModal = () => {
@@ -23,15 +24,15 @@ const RegistrationModal = () => {
     return userData;
   };
   const [ModalText, setModalText] = useState(
-    // <RegistrationForm
-    // username={username}
-    // setUsername={setUsername}
-    // password={setPassword}
-    // email={setEmail}
-    // phoneNumber={setPhoneNumber}
-    // name={setName}
-    // />
-    <div>ez van itt</div>
+    <RegistrationForm
+    username={username}
+    setUsername={setUsername}
+    password={setPassword}
+    email={setEmail}
+    phoneNumber={setPhoneNumber}
+    name={setName}
+    />
+    
   );
   const [confirmLoading, setConfirmLoading] = useState(false);
   

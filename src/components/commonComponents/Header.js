@@ -4,7 +4,7 @@ import Logout from "./Logout";
 import Navbar from "./Navbar";
 import { Row, Col } from "antd";
 import { LoginContext } from "../context/LoginContext";
-import RegistrationModal from "./RegistrationModal";
+import RegistrationModal from "./registration/RegistrationModal";
 
 const Header = () => {
   const { LoggedInAsRole } = useContext(LoginContext);
