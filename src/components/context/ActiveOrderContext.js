@@ -20,7 +20,6 @@ export const ActiveOrderProvider = (props) => {
       };
       axios(options).then((resp) => {
         setActiveOrders(resp.data);
-        console.log(resp.data);
       });
     } else {
       setActiveOrders([]);

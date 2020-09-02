@@ -6,6 +6,7 @@ import CookReadyButton from "./orderControls/CookReadyButton";
 import PizzaIsDeliveredButton from "./orderControls/PizzaIsDeliveredButton";
 import ManagerAssignCookDropdown from "./orderControls/ManagerAssignCookDropdown";
 import ManagerAssignDeliveryDropdown from "./orderControls/ManagerAssignDeliveryDropdown";
+import Address from "../activeOrders/Address"
 const Order = (props) => {
   const { LoggedInAsRole } = useContext(LoginContext);
   const order = props.order;
@@ -49,7 +50,6 @@ const Order = (props) => {
                 <span style={{ fontWeight: "bold", paddingRight: "4px" }}>
                   Assigned Cook:{" "}
                 </span>
-                {console.log(order)}
                 {order.cook !== null ? (
                   order.cook.username
                 ) : (
@@ -76,7 +76,7 @@ const Order = (props) => {
             {order.orderStatus}
           </Row>
         </Col>
-        <Col span={4}>
+        <Col span={3}>
           <Progress
             type="circle"
             percent={calculateProgress(order.orderStatus)}
@@ -86,14 +86,19 @@ const Order = (props) => {
         <Col span={8}>
           <Row style={{ fontWeight: "bold" }}>
             <Col span={4}>Pizza id</Col>
-            <Col span={4}>Name</Col>
+            <Col span={6}>Name</Col>
             <Col span={4}>Quantity</Col>
           </Row>
           {order.incomingOrderedPizzas.map((pizza) => (
             <SimplePizza key={pizza.id} pizza={pizza} />
           ))}
         </Col>
-        <Col span={4}>
+        {LoggedInAsRole === "ROLE_DELIVERYGUY" || LoggedInAsRole === "ROLE_MANAGER"? (
+          <Col span={4}>
+            <Address address = {order.address}/>
+          </Col>
+        ) : null}
+        <Col span={1}>
           {LoggedInAsRole === "ROLE_COOK" ? (
             <CookReadyButton id={order.id} />
           ) : null}
@@ -112,6 +117,7 @@ const Order = (props) => {
             />
           ) : null}
         </Col>
+        
       </Row>
     </Card>
   );

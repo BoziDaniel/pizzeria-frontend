@@ -6,7 +6,7 @@ const SimplePizza = (props) => {
   return (
     <Row key={pizza.id}>
       <Col span={4}>{pizza.id}</Col>
-      <Col span={4}>{pizza.name}</Col>
+      <Col span={6}>{pizza.name}</Col>
       <Col span={4}>{pizza.quantity}</Col>
     </Row>
   );
