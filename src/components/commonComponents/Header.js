@@ -4,6 +4,7 @@ import Logout from "./Logout";
 import Navbar from "./Navbar";
 import { Row, Col } from "antd";
 import { LoginContext } from "../context/LoginContext";
+import RegistrationModal from "./RegistrationModal";
 
 const Header = () => {
   const { LoggedInAsRole } = useContext(LoginContext);
@@ -18,7 +19,7 @@ const Header = () => {
           <Navbar />
         </Col>
         <Col>
-          <div>{LoggedInAsRole === "" ? <Login /> : <Logout />}</div>
+          <div>{LoggedInAsRole === "" ? <div><RegistrationModal/><Login /></div> : <Logout />}</div>
         </Col>
       </Row>
     </div>
