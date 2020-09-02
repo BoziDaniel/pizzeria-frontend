@@ -8,9 +8,7 @@ import RegistrationModal from "./registration/RegistrationModal";
 
 const Header = () => {
   const { LoggedInAsRole } = useContext(LoginContext);
-  useEffect(() => {
-    
-  }, [LoggedInAsRole]);
+  useEffect(() => {}, [LoggedInAsRole]);
   return (
     <div style={{ background: "#d4b106" }}>
       <h1>PizzaShop</h1>
@@ -19,7 +17,16 @@ const Header = () => {
           <Navbar />
         </Col>
         <Col>
-          <div>{LoggedInAsRole === "" ? <div><RegistrationModal/><Login /></div> : <Logout />}</div>
+          <div>
+            {LoggedInAsRole === "" ? (
+              <Row>
+                <Login />
+                <RegistrationModal />
+              </Row>
+            ) : (
+              <Logout />
+            )}
+          </div>
         </Col>
       </Row>
     </div>
