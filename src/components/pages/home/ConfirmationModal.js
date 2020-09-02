@@ -67,7 +67,6 @@ const ConfirmationModal = () => {
     };
     axios(options).then((resp) => {
       if (resp.status === 200) {
-        setCartItems([]);
         setModalText(
           "Succesfull order! check your emails. This modal will close in two seconds"
         );
@@ -75,6 +74,7 @@ const ConfirmationModal = () => {
         setTimeout(() => {
           setVisible(false);
           setConfirmLoading(false);
+          setCartItems([]);
         }, 2000);
       } else {
         setModalText(resp.status + " error during order");

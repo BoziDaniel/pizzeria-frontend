@@ -1,7 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Modal, Button } from "antd";
 import RegistrationForm from "./RegistrationForm";
-
+import axios from "axios";
 
 const RegistrationModal = () => {
   //username password email phoneNumber name
@@ -13,73 +13,66 @@ const RegistrationModal = () => {
   const [name, setName] = useState("");
   const [visible, setVisible] = useState(false);
 
-
   const createUserData = () => {
     const userData = {
-        username: username,
-        password: password,
-        email: email,
-        phoneNumber: phoneNumber,
-        name: name,
+      username: username,
+      password: password,
+      email: email,
+      phoneNumber: phoneNumber,
+      name: name,
     };
     return userData;
   };
-  const [ModalText, setModalText] = useState(
+  const initialModalText = (
     <RegistrationForm
-    username={username}
-    setUsername={setUsername}
-    password={password}
-    setPassword={setPassword}
-    confirmPassword={confirmPassword}
-    setConfirmPassword={setConfirmPassword}
-    email={email}
-    setEmail={setEmail}
-    phoneNumber={phoneNumber}
-    setPhoneNumber={setPhoneNumber}
-    name={name}
-    setName={setName}
+      username={username}
+      setUsername={setUsername}
+      password={password}
+      setPassword={setPassword}
+      confirmPassword={confirmPassword}
+      setConfirmPassword={setConfirmPassword}
+      email={email}
+      setEmail={setEmail}
+      phoneNumber={phoneNumber}
+      setPhoneNumber={setPhoneNumber}
+      name={name}
+      setName={setName}
     />
-    
   );
+  const [ModalText, setModalText] = useState(initialModalText);
   const [confirmLoading, setConfirmLoading] = useState(false);
-  
+
   const showModal = () => {
     setVisible(true);
   };
 
-
-
   const handleOk = () => {
-     const user = createUserData();
-    
-    
+    const user = createUserData();
     console.log(user);
-    // let token = sessionStorage.getItem("token");
-    // token = "Bearer " + token;
-    // const options = {
-    //   url: "http://localhost:8080/orders/add-new",
-    //   method: "POST",
-    //   headers: {
-    //     Authorization: token,
-    //     "Content-Type": "application/json",
-    //   },
-    //   data: order,
-    // };
-    // axios(options).then((resp) => {
-    //   if (resp.status === 200) {
-    //     setCartItems([]);
-    //     setModalText(
-    //       "Succesfull order! check your emails. This modal will close in two seconds"
-    //     );
-    //     setConfirmLoading(true);
-    //     setTimeout(() => {
-    //       setVisible(false);
-    //       setConfirmLoading(false);
-    //     }, 2000);
-    //   } else {
-    //     setModalText(resp.status + " error during order");
-    //   }
-    // });
+
+    const options = {
+      url: "http://localhost:8080/registration",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: user,
+    };
+    axios(options).then((resp) => {
+      if (resp.status === 200) {
+        setModalText(
+          "Succesfull registratioon! check your emails. This modal will close in two seconds"
+        );
+        setConfirmLoading(true);
+        setTimeout(() => {
+          setVisible(false);
+          setConfirmLoading(false);
+          setModalText(initialModalText);
+        }, 2000);
+      } else {
+        setModalText(resp.status + " error during registration");
+      }
+    });
   };
 
   const handleCancel = () => {
