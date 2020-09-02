@@ -7,6 +7,7 @@ const RegistrationModal = () => {
   //username password email phoneNumber name
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [name, setName] = useState("");
@@ -27,10 +28,16 @@ const RegistrationModal = () => {
     <RegistrationForm
     username={username}
     setUsername={setUsername}
-    password={setPassword}
-    email={setEmail}
-    phoneNumber={setPhoneNumber}
-    name={setName}
+    password={password}
+    setPassword={setPassword}
+    confirmPassword={confirmPassword}
+    setConfirmPassword={setConfirmPassword}
+    email={email}
+    setEmail={setEmail}
+    phoneNumber={phoneNumber}
+    setPhoneNumber={setPhoneNumber}
+    name={name}
+    setName={setName}
     />
     
   );
@@ -40,17 +47,13 @@ const RegistrationModal = () => {
     setVisible(true);
   };
 
-//   const convertToOrderDTO = (item) => {
-//     return { id: item.id, quantity: item.quantity };
-//   };
+
 
   const handleOk = () => {
-    // const address = createAddress();
-    // let order = { incomingOrderedPizzas: [], address: address };
-    // for (let item of cartItems) {
-    //   order.incomingOrderedPizzas.push(convertToOrderDTO(item));
-    // }
-    // console.log(order);
+     const user = createUserData();
+    
+    
+    console.log(user);
     // let token = sessionStorage.getItem("token");
     // token = "Bearer " + token;
     // const options = {
