@@ -82,7 +82,7 @@ const RegistrationModal = () => {
 
   return (
     <div>
-      <Button type="primary" onClick={showModal}>
+      <Button type="primary" onClick={showModal} style={{ marginRight: 5 }}>
         Register
       </Button>
       <Modal
