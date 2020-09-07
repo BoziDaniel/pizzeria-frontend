@@ -6,7 +6,7 @@ export const ActiveOrderContext = createContext();
 export const ActiveOrderProvider = (props) => {
   const { LoggedInAsRole } = useContext(LoginContext);
   const [ActiveOrders, setActiveOrders] = useState([]);
-  const [needsRefresh, setNeedsRefresh] = useState(true);
+  const [needsRefresh, setNeedsRefresh] = useState(false);
   useEffect(() => {
     console.log("getting active orders");
     if (needsRefresh === false) {
