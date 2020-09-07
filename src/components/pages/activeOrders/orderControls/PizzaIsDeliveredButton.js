@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button } from "antd";
+import { ActiveOrderContext } from "../../../context/ActiveOrderContext";
+
 import axios from "axios";
 const PizzaIsDeliveredButton = (props) => {
+  const { setNeedsRefresh } = useContext(ActiveOrderContext);
   const handlePizzaIsDelivered = () => {
     let token = sessionStorage.getItem("token");
     token = "Bearer " + token;
@@ -15,6 +18,7 @@ const PizzaIsDeliveredButton = (props) => {
     };
     axios(options).then((resp) => {
       console.log(resp);
+      setNeedsRefresh(true);
     });
   };
   return (

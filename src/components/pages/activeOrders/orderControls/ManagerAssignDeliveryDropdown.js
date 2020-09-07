@@ -2,10 +2,14 @@ import React, { useContext } from "react";
 import { Menu, Dropdown } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { WorkerContext } from "../../../context/WorkerContext";
+import { ActiveOrderContext } from "../../../context/ActiveOrderContext";
+
 import axios from "axios";
 
 const ManagerAssignDeliveryDropdown = (props) => {
   const { deliveryGuys } = useContext(WorkerContext);
+  const { setNeedsRefresh } = useContext(ActiveOrderContext);
+
   const onClick = ({ key }) => {
     let token = sessionStorage.getItem("token");
     token = "Bearer " + token;
@@ -20,6 +24,7 @@ const ManagerAssignDeliveryDropdown = (props) => {
     };
     axios(options).then((resp) => {
       if (resp.status === 200) {
+        setNeedsRefresh(true);
         alert("succesfulli assigned deliveryguy");
       } else {
         alert(resp.status + " error during assigning cook");

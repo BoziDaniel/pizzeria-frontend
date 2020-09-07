@@ -2,11 +2,13 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { Button, Input, Row, Col } from "antd";
 import { LoginContext } from "../context/LoginContext";
+import { ActiveOrderContext } from "../context/ActiveOrderContext";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { setLoggedInAsRole } = useContext(LoginContext);
+  const { setNeedsRefresh } = useContext(ActiveOrderContext);
   const handleLogin = (e) => {
     const creditentials = { username: username, password: password };
     axios.defaults.headers.post["Content-Type"] =
@@ -16,6 +18,7 @@ const Login = () => {
       const token = resp.data.token;
       sessionStorage.setItem("token", token);
       sessionStorage.setItem("role", resp.data.roles[0]);
+      setNeedsRefresh(true);
       if (sessionStorage.getItem("token") !== "") {
         alert("logged in");
       } // Error handling missing, what happens if i get 403, etc.

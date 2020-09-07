@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Modal, Button } from "antd";
 import CartContext from "../../context/CartContext";
+import { ActiveOrderContext } from "../../context/ActiveOrderContext";
 import AddressForm from "./AddressForm";
 import axios from "axios";
 
@@ -11,6 +12,7 @@ const ConfirmationModal = () => {
   const [streetNumber, setStreetNumber] = useState("");
   const [comment, setComment] = useState("");
   const [visible, setVisible] = useState(false);
+  const { setNeedsRefresh } = useContext(ActiveOrderContext);
 
   const createAddress = () => {
     const address = {
@@ -53,7 +55,6 @@ const ConfirmationModal = () => {
     for (let item of cartItems) {
       order.incomingOrderedPizzas.push(convertToOrderDTO(item));
     }
-    console.log(order);
     let token = sessionStorage.getItem("token");
     token = "Bearer " + token;
     const options = {
@@ -75,6 +76,8 @@ const ConfirmationModal = () => {
           setVisible(false);
           setConfirmLoading(false);
           setCartItems([]);
+          setNeedsRefresh(true);
+
         }, 2000);
       } else {
         setModalText(resp.status + " error during order");

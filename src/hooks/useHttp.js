@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-const useHttp = (url, method, token, dependencies) => {
+const useHttp = (url, method, dependencies) => {
   const [fetchedData, setFetchedData] = useState(null);
+  let token = sessionStorage.getItem("token");
+  token = "Bearer " + token;
   const options = {
     url: url,
     method: method,
@@ -11,16 +13,13 @@ const useHttp = (url, method, token, dependencies) => {
     },
   };
   useEffect(() => {
-    
     axios(options).then((resp) => {
-        setFetchedData(resp.data);
-      });
-      return () => {
-          console.log("cleanup")
-      }
-  }, [dependencies, options])
+      setFetchedData(resp.data);
+    });
   
-  return [fetchedData, setFetchedData];
+  }, [dependencies, options]);
+
+  return [fetchedData];
 };
 
 export default useHttp;

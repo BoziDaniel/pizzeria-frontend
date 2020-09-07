@@ -6,7 +6,13 @@ export const ActiveOrderContext = createContext();
 export const ActiveOrderProvider = (props) => {
   const { LoggedInAsRole } = useContext(LoginContext);
   const [ActiveOrders, setActiveOrders] = useState([]);
+  const [needsRefresh, setNeedsRefresh] = useState(true);
   useEffect(() => {
+    console.log("getting active orders");
+    if (needsRefresh === false) {
+      return;
+    }
+    setNeedsRefresh(false);
     if (LoggedInAsRole !== "") {
       let token = sessionStorage.getItem("token");
       token = "Bearer " + token;
@@ -24,9 +30,11 @@ export const ActiveOrderProvider = (props) => {
     } else {
       setActiveOrders([]);
     }
-  }, [LoggedInAsRole]);
+  }, [LoggedInAsRole, needsRefresh]);
   return (
-    <ActiveOrderContext.Provider value={{ ActiveOrders, setActiveOrders }}>
+    <ActiveOrderContext.Provider
+      value={{ ActiveOrders, setActiveOrders, needsRefresh, setNeedsRefresh }}
+    >
       {props.children}
     </ActiveOrderContext.Provider>
   );

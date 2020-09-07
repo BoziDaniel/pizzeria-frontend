@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button } from "antd";
 import axios from "axios";
+import { ActiveOrderContext } from "../../../context/ActiveOrderContext";
+
 const CookReadyButton = (props) => {
+  const { setNeedsRefresh } = useContext(ActiveOrderContext);
+
   const handlePizzaIsReady = () => {
     let token = sessionStorage.getItem("token");
     token = "Bearer " + token;
@@ -15,6 +19,7 @@ const CookReadyButton = (props) => {
     };
     axios(options).then((resp) => {
       console.log(resp);
+      setNeedsRefresh(true);
     });
   };
   return (

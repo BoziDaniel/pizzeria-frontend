@@ -17,17 +17,18 @@ function App() {
     <div className="App" style={{ background: "#f0f0f0", height: "100%" }}>
       <Router>
         <LoginProvider>
-          <Route path="/" component={Header} />
-          <CartProvider>
-            <PizzaProvider>
-              <Route exact path="/" component={Home} />
-            </PizzaProvider>
-          </CartProvider>
-          <Route path="/contact" component={Contact} />
           <WorkerProvider>
             <ActiveOrderProvider>
+              <Route path="/" component={Header} />
+              <CartProvider>
+                <PizzaProvider>
+                  <Route exact path="/" component={Home} />
+                </PizzaProvider>
+              </CartProvider>
+              <Route path="/contact" component={Contact} />
+
               <Route path="/orders/active" component={ActiveOrders} />
-            </ActiveOrderProvider>{" "}
+            </ActiveOrderProvider>
           </WorkerProvider>
         </LoginProvider>
       </Router>
