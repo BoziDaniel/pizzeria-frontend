@@ -19,15 +19,14 @@ function App() {
         <LoginProvider>
           <WorkerProvider>
             <ActiveOrderProvider>
-              <Route path="/" component={Header} />
               <CartProvider>
+                <Route path="/" component={Header} />
                 <PizzaProvider>
                   <Route exact path="/" component={Home} />
                 </PizzaProvider>
+                <Route path="/contact" component={Contact} />
+                <Route path="/orders/active" component={ActiveOrders} />
               </CartProvider>
-              <Route path="/contact" component={Contact} />
-
-              <Route path="/orders/active" component={ActiveOrders} />
             </ActiveOrderProvider>
           </WorkerProvider>
         </LoginProvider>

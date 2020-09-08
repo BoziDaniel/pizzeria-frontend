@@ -8,7 +8,6 @@ export const ActiveOrderProvider = (props) => {
   const [ActiveOrders, setActiveOrders] = useState([]);
   const [needsRefresh, setNeedsRefresh] = useState(false);
   useEffect(() => {
-    console.log("getting active orders");
     if (needsRefresh === false) {
       return;
     }
