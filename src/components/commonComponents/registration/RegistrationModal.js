@@ -12,7 +12,7 @@ const RegistrationModal = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [name, setName] = useState("");
   const [visible, setVisible] = useState(false);
-
+  const [isUsernameNotOccupied,setIsUsernameNotOccupied] = useState(false);
   const createUserData = () => {
     const userData = {
       username: username,
@@ -37,6 +37,7 @@ const RegistrationModal = () => {
       setPhoneNumber={setPhoneNumber}
       name={name}
       setName={setName}
+      setIsUsernameNotOccupied={setIsUsernameNotOccupied}
     />
   );
   const [ModalText, setModalText] = useState(initialModalText);
@@ -46,33 +47,65 @@ const RegistrationModal = () => {
     setVisible(true);
   };
 
+  const isEmailValid = () => {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
+
+  const arePasswordsMatch = () => {
+    return password === confirmPassword;
+  }
+  
+  const isPhoneNumberValid = () => {
+    const re = /[0-9]{2}-[0-9]{2}-[0-9]{3}-[0-9]{4}/;
+    return re.test(String(phoneNumber).toLowerCase());
+  }
+
+  const isPasswordHasMinLength = () => {
+    return password.length> 3;
+  }
+
+  const areInputsValid = () => {
+    return (
+    isEmailValid() &&
+    arePasswordsMatch() &&
+    isPhoneNumberValid() &&
+    isPasswordHasMinLength() &&
+    isUsernameNotOccupied)
+  }
+
+  
+
   const handleOk = () => {
     const user = createUserData();
-    console.log(user);
-
-    const options = {
-      url: "http://localhost:8080/registration",
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: user,
-    };
-    axios(options).then((resp) => {
-      if (resp.status === 200) {
-        setModalText(
-          "Succesfull registratioon! check your emails. This modal will close in two seconds"
-        );
-        setConfirmLoading(true);
-        setTimeout(() => {
-          setVisible(false);
-          setConfirmLoading(false);
-          setModalText(initialModalText);
-        }, 2000);
-      } else {
-        setModalText(resp.status + " error during registration");
-      }
-    });
+    if(areInputsValid()){
+      const options = {
+        url: "http://localhost:8080/registration",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: user,
+      };
+      axios(options).then((resp) => {
+        if (resp.status === 200) {
+          setModalText(
+            "Succesfull registratioon! check your emails. This modal will close in two seconds"
+          );
+          setConfirmLoading(true);
+          setTimeout(() => {
+            setVisible(false);
+            setConfirmLoading(false);
+            setModalText(initialModalText);
+          }, 2000);
+        } else {
+          setModalText(resp.status + " error during registration");
+        }
+      });
+    }else{
+      alert("invalid input try again");
+    }
+    
   };
 
   const handleCancel = () => {

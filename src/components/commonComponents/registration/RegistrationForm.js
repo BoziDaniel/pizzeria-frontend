@@ -1,6 +1,7 @@
 import React from "react";
 import { Input, Row } from "antd";
 import { UserOutlined, PhoneOutlined } from "@ant-design/icons";
+import axios from "axios";
 
 const RegistrationForm = (props) => {
   const handleNameChange = (e) => {
@@ -8,6 +9,7 @@ const RegistrationForm = (props) => {
   };
   const handleUsernameChange = (e) => {
     props.setUsername(e.target.value);
+    checkIfUsernameNotOccupied(e.target.value);
   };
   const handleEmailChange = (e) => {
     props.setEmail(e.target.value);
@@ -20,6 +22,19 @@ const RegistrationForm = (props) => {
   };
   const handleConfirmPasswordChange = (e) => {
     props.setConfirmPassword(e.target.value);
+  };
+
+  const checkIfUsernameNotOccupied = (username) => {
+    const options = {
+      url: "http://localhost:8080/users/exists/" + username,
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    axios(options).then((resp) => {
+      props.setIsUsernameNotOccupied(!resp.data);
+    });
   };
 
   return (
@@ -51,7 +66,8 @@ const RegistrationForm = (props) => {
       <Row>
         Phone:{" "}
         <Input
-          placeholder="example: +36-70-9443-402"
+          maxLength="14"
+          placeholder="example: 06-70-944-3402"
           prefix={<PhoneOutlined />}
           onChange={handlePhoneNumberChange}
         />
