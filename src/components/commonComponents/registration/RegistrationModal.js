@@ -59,19 +59,33 @@ const RegistrationModal = () => {
     const passWordHasMinLength = password.length > 3;
     return passWordHasMinLength;
   };
-  const checkIfPasswordContainsUpperCaseLetter = () => {
+  
+  const checkIfPasswordContainsRequiredCharacters = () => {
+    let isNumberInPass = false;
+    let isLowerCaseInPass = false;
+    let isUpperCaseInPass = false;
     let i = 0;
     while (i < password.length) {
       let character = password.charAt(i);
-      if (
-        (character === character.toUpperCase()) &
-        (character !== character.toLowerCase())
+      if (!isNaN(character)) {
+        isNumberInPass = true;
+      } else if (
+        character === character.toUpperCase() &&
+        character !== character.toLowerCase()
       ) {
-        return true;
+        isUpperCaseInPass = true;
+      } else if (
+        character !== character.toUpperCase() &&
+        character === character.toLowerCase()
+      ) {
+        isLowerCaseInPass = true;
       }
       i++;
     }
-    return false;
+    console.log("isNumberInPass: " + isNumberInPass);
+    console.log("isLowerCaseInPass: " + isLowerCaseInPass);
+    console.log("isUpperCaseInPass: " + isUpperCaseInPass);
+    return isNumberInPass && isLowerCaseInPass && isUpperCaseInPass;
   };
   const areInputsValid = () => {
     console.log(password);
@@ -84,8 +98,8 @@ const RegistrationModal = () => {
       "password is at least 4 characters long: " + checkIsPasswordHasMinLength()
     );
     console.log(
-      "password contains at least 1 uppercase letter: " +
-        checkIfPasswordContainsUpperCaseLetter()
+      "password contains at least 1 lowercase letter, 1 uppercase letter and 1 number: " +
+        checkIfPasswordContainsRequiredCharacters()
     );
 
     return (
@@ -94,7 +108,7 @@ const RegistrationModal = () => {
       checkIsPasswordHasMinLength() &&
       isPhoneNumberValid &&
       isUsernameNotOccupied &&
-      checkIfPasswordContainsUpperCaseLetter()
+      checkIfPasswordContainsRequiredCharacters()
     );
   };
 
