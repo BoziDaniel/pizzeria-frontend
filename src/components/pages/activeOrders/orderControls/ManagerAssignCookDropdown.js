@@ -3,7 +3,7 @@ import { Menu, Dropdown } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { WorkerContext } from "../../../context/WorkerContext";
 import { ActiveOrderContext } from "../../../context/ActiveOrderContext";
-import axios from 'axios';
+import axios from "axios";
 
 const ManagerAssignCookDropdown = (props) => {
   const { setNeedsRefresh } = useContext(ActiveOrderContext);
@@ -12,7 +12,7 @@ const ManagerAssignCookDropdown = (props) => {
     let token = sessionStorage.getItem("token");
     token = "Bearer " + token;
     const options = {
-      url: "http://localhost:8080/orders/assignCook/"+props.orderId,
+      url: "http://localhost:8080/orders/assignCook/" + props.orderId,
       method: "PUT",
       headers: {
         Authorization: token,
@@ -24,25 +24,28 @@ const ManagerAssignCookDropdown = (props) => {
       if (resp.status === 200) {
         setNeedsRefresh(true);
 
-        alert("succesfulli assigned cook")
+        alert("succesfulli assigned cook");
       } else {
         alert(resp.status + " error during assigning cook");
       }
     });
-
   };
   const menu = (
     <Menu onClick={onClick}>
-      { cooks.map((cook)=>(
+      {cooks.map((cook) => (
         <Menu.Item key={cook.id}>{cook.username}</Menu.Item>
-      )) }
+      ))}
     </Menu>
   );
   return (
     <div>
       <Dropdown overlay={menu}>
-        <p className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-          Assign order to Cook <DownOutlined />
+        <p
+          className="ant-dropdown-link"
+          onClick={(e) => e.preventDefault()}
+          style={{ background: "#bae7ff" }}
+        >
+          Assign Cook <DownOutlined />
         </p>
       </Dropdown>
     </div>

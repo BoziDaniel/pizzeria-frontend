@@ -41,8 +41,12 @@ const ManagerAssignDeliveryDropdown = (props) => {
   return (
     <div>
       <Dropdown overlay={menu}>
-        <p className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-          Assign order to DeliveryGuy <DownOutlined />
+        <p
+          className="ant-dropdown-link"
+          onClick={(e) => e.preventDefault()}
+          style={{ background: "#bae7ff" }}
+        >
+          Assign DeliveryGuy <DownOutlined />
         </p>
       </Dropdown>
     </div>

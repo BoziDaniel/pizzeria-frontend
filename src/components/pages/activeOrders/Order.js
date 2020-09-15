@@ -6,7 +6,7 @@ import CookReadyButton from "./orderControls/CookReadyButton";
 import PizzaIsDeliveredButton from "./orderControls/PizzaIsDeliveredButton";
 import ManagerAssignCookDropdown from "./orderControls/ManagerAssignCookDropdown";
 import ManagerAssignDeliveryDropdown from "./orderControls/ManagerAssignDeliveryDropdown";
-import Address from "../activeOrders/Address"
+import Address from "../activeOrders/Address";
 const Order = (props) => {
   const { LoggedInAsRole } = useContext(LoginContext);
   const order = props.order;
@@ -31,7 +31,7 @@ const Order = (props) => {
   return (
     <Card style={{ marginTop: "5px" }}>
       <Row id={order.id}>
-        <Col span={4}>
+        <Col span={5}>
           <Row>
             <span style={{ fontWeight: "bold", paddingRight: "4px" }}>
               Order id:
@@ -52,9 +52,13 @@ const Order = (props) => {
                 </span>
                 {order.cook !== null ? (
                   order.cook.username
-                ) : (
-                  "not assigned"
-                )}
+                ) : LoggedInAsRole === "ROLE_MANAGER" &&
+                  order.orderStatus === "ORDERED" ? (
+                  <ManagerAssignCookDropdown
+                    cooks={props.cooks}
+                    orderId={order.id}
+                  />
+                ) : null}
               </Row>
               <Row>
                 <span style={{ fontWeight: "bold", paddingRight: "4px" }}>
@@ -62,9 +66,13 @@ const Order = (props) => {
                 </span>
                 {order.deliveryGuy !== null ? (
                   order.deliveryGuy.username
-                ) : (
-                  "not assigned"
-                )}
+                ) : LoggedInAsRole === "ROLE_MANAGER" &&
+                  order.orderStatus === "READY" ? (
+                  <ManagerAssignDeliveryDropdown
+                    deliveryGuys={props.deliveryGuys}
+                    orderId={order.id}
+                  />
+                ) : null}
               </Row>
             </div>
           ) : null}
@@ -93,9 +101,10 @@ const Order = (props) => {
             <SimplePizza key={pizza.id} pizza={pizza} />
           ))}
         </Col>
-        {LoggedInAsRole === "ROLE_DELIVERYGUY" || LoggedInAsRole === "ROLE_MANAGER"? (
+        {LoggedInAsRole === "ROLE_DELIVERYGUY" ||
+        LoggedInAsRole === "ROLE_MANAGER" ? (
           <Col span={4}>
-            <Address address = {order.address}/>
+            <Address address={order.address} />
           </Col>
         ) : null}
         <Col span={1}>
@@ -105,19 +114,8 @@ const Order = (props) => {
           {LoggedInAsRole === "ROLE_DELIVERYGUY" ? (
             <PizzaIsDeliveredButton id={order.id} />
           ) : null}
-          {LoggedInAsRole === "ROLE_MANAGER" &&
-          order.orderStatus === "ORDERED" ? (
-            <ManagerAssignCookDropdown cooks={props.cooks} orderId={order.id} />
-          ) : null}
-          {LoggedInAsRole === "ROLE_MANAGER" &&
-          order.orderStatus === "READY" ? (
-            <ManagerAssignDeliveryDropdown
-              deliveryGuys={props.deliveryGuys}
-              orderId={order.id}
-            />
-          ) : null}
+      
         </Col>
-        
       </Row>
     </Card>
   );
