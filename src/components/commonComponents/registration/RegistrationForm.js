@@ -4,6 +4,8 @@ import { UserOutlined, PhoneOutlined } from "@ant-design/icons";
 import axios from "axios";
 
 const RegistrationForm = (props) => {
+  console.log("regForm refreshes");
+
   const handleNameChange = (e) => {
     props.setName(e.target.value);
   };
@@ -21,8 +23,6 @@ const RegistrationForm = (props) => {
   };
   const handlePasswordChange = (e) => {
     props.setPassword(e.target.value);
-    checkArePasswordsMatch();
-    checkIsPasswordHasMinLength(e.target.value);
   };
   const handleConfirmPasswordChange = (e) => {
     props.setConfirmPassword(e.target.value);
@@ -33,20 +33,10 @@ const RegistrationForm = (props) => {
     props.setIsEmailValid(emailIsValid);
   };
 
-  const checkArePasswordsMatch = () => {
-    const passwordsAreTheSame = props.password === props.confirmPassword;
-    props.setArePasswordsMatch(passwordsAreTheSame);
-  };
-
   const checkIsPhoneNumberValid = (phoneNumber) => {
     const re = /[0-9]{2,2}-[0-9]{2,2}-[0-9]{3,3}-[0-9]{4,4}/;
     const phoneIsValid = re.test(String(phoneNumber).toLowerCase());
     props.setIsPhoneNumberValid(phoneIsValid);
-  };
-
-  const checkIsPasswordHasMinLength = (password) => {
-    const passWordHasMinLength = password.length > 3;
-    props.setIsPasswordHasMinLength(passWordHasMinLength);
   };
 
   const checkIfUsernameNotOccupied = (username) => {

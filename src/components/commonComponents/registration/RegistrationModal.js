@@ -4,6 +4,7 @@ import RegistrationForm from "./RegistrationForm";
 import axios from "axios";
 
 const RegistrationModal = () => {
+  console.log("regmodal refreshes")
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -13,9 +14,7 @@ const RegistrationModal = () => {
   const [visible, setVisible] = useState(false);
   const [isUsernameNotOccupied, setIsUsernameNotOccupied] = useState(false);
   const [isEmailValid, setIsEmailValid] = useState(false);
-  const [arePasswordsMatch, setArePasswordsMatch] = useState(false);
   const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(false);
-  const [isPasswordHasMinLength, setIsPasswordHasMinLength] = useState(false);
   const createUserData = () => {
     const userData = {
       username: username,
@@ -44,12 +43,9 @@ const RegistrationModal = () => {
       setIsUsernameNotOccupied={setIsUsernameNotOccupied}
       isEmailValid={isEmailValid}
       setIsEmailValid={setIsEmailValid}
-      arePasswordsMatch={arePasswordsMatch}
-      setArePasswordsMatch={setArePasswordsMatch}
       isPhoneNumberValid={isPhoneNumberValid}
       setIsPhoneNumberValid={setIsPhoneNumberValid}
-      isPasswordHasMinLength={isPasswordHasMinLength}
-      setIsPasswordHasMinLength={setIsPasswordHasMinLength}
+  
     />
   );
   const [ModalText, setModalText] = useState(initialModalText);
@@ -58,20 +54,27 @@ const RegistrationModal = () => {
   const showModal = () => {
     setVisible(true);
   };
-
+  const checkArePasswordsMatch = () => {
+    return password === confirmPassword;
+  };
+  const checkIsPasswordHasMinLength = () => {
+    const passWordHasMinLength = password.length > 3;
+    return passWordHasMinLength;
+  };
   const areInputsValid = () => {
+    checkArePasswordsMatch();
     console.log("is email valid: " + isEmailValid);
-    console.log("phone number is valid " + isPhoneNumberValid);
-    console.log("are passwords the same: " + arePasswordsMatch);
+    console.log("phone number is valid: " + isPhoneNumberValid);
+    console.log("are passwords the same: " + checkArePasswordsMatch());
     console.log(
-      "password is at least 3 characters long " + isPasswordHasMinLength
+      "password is at least 4 characters long: " + checkIsPasswordHasMinLength()
     );
-    console.log("username is not occupied " + isUsernameNotOccupied);
+    console.log("username is not occupied: " + isUsernameNotOccupied);
     return (
       isEmailValid &&
-      arePasswordsMatch &&
+      checkArePasswordsMatch() &&
+      checkIsPasswordHasMinLength()&&
       isPhoneNumberValid &&
-      isPasswordHasMinLength &&
       isUsernameNotOccupied
     );
   };
