@@ -2,9 +2,13 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "antd";
 import { LoginContext } from "../context/LoginContext";
+import { ActiveOrderContext } from "../context/ActiveOrderContext";
 const Navbar = () => {
   const { LoggedInAsRole } = useContext(LoginContext);
-
+  const { setNeedsRefresh } = useContext(ActiveOrderContext);
+  const handleClick = () => {
+    setNeedsRefresh(true);
+  };
   return (
     <div>
       <Link className="link" to="/">
@@ -18,10 +22,10 @@ const Navbar = () => {
           <b>Contact</b>
         </Button>
       </Link>
-      
+
       {LoggedInAsRole === "" ? null : (
         <Link className="link" to="/orders/active">
-          <Button size={"large"}>
+          <Button size={"large"} onClick={handleClick}>
             <b>Active Orders</b>
           </Button>
         </Link>

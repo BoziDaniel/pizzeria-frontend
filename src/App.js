@@ -13,6 +13,7 @@ import { WorkerProvider } from "./components/context/WorkerContext";
 function App() {
   //sets the backround color to grey;
   document.body.style = "background: #f0f0f0";
+
   return (
     <div className="App" style={{ background: "#f0f0f0", height: "100%" }}>
       <Router>
