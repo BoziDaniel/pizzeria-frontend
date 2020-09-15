@@ -4,7 +4,6 @@ import RegistrationForm from "./RegistrationForm";
 import axios from "axios";
 
 const RegistrationModal = () => {
-  console.log("regmodal refreshes")
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -45,7 +44,6 @@ const RegistrationModal = () => {
       setIsEmailValid={setIsEmailValid}
       isPhoneNumberValid={isPhoneNumberValid}
       setIsPhoneNumberValid={setIsPhoneNumberValid}
-  
     />
   );
   const [ModalText, setModalText] = useState(initialModalText);
@@ -61,21 +59,42 @@ const RegistrationModal = () => {
     const passWordHasMinLength = password.length > 3;
     return passWordHasMinLength;
   };
+  const checkIfPasswordContainsUpperCaseLetter = () => {
+    let i = 0;
+    while (i < password.length) {
+      let character = password.charAt(i);
+      if (
+        (character === character.toUpperCase()) &
+        (character !== character.toLowerCase())
+      ) {
+        return true;
+      }
+      i++;
+    }
+    return false;
+  };
   const areInputsValid = () => {
-    checkArePasswordsMatch();
+    console.log(password);
     console.log("is email valid: " + isEmailValid);
     console.log("phone number is valid: " + isPhoneNumberValid);
+    console.log("username is not occupied: " + isUsernameNotOccupied);
+    console.log("password check: ");
     console.log("are passwords the same: " + checkArePasswordsMatch());
     console.log(
       "password is at least 4 characters long: " + checkIsPasswordHasMinLength()
     );
-    console.log("username is not occupied: " + isUsernameNotOccupied);
+    console.log(
+      "password contains at least 1 uppercase letter: " +
+        checkIfPasswordContainsUpperCaseLetter()
+    );
+
     return (
       isEmailValid &&
       checkArePasswordsMatch() &&
-      checkIsPasswordHasMinLength()&&
+      checkIsPasswordHasMinLength() &&
       isPhoneNumberValid &&
-      isUsernameNotOccupied
+      isUsernameNotOccupied &&
+      checkIfPasswordContainsUpperCaseLetter()
     );
   };
 

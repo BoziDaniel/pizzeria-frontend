@@ -4,7 +4,6 @@ import { UserOutlined, PhoneOutlined } from "@ant-design/icons";
 import axios from "axios";
 
 const RegistrationForm = (props) => {
-  console.log("regForm refreshes");
 
   const handleNameChange = (e) => {
     props.setName(e.target.value);
