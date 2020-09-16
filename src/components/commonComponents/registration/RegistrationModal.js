@@ -12,7 +12,11 @@ const RegistrationModal = () => {
   const [name, setName] = useState("");
   const [visible, setVisible] = useState(false);
   const [isUsernameNotOccupied, setIsUsernameNotOccupied] = useState(false);
+  const [isPhoneNumberNotOccupied, setIsPhoneNumberNotOccupied] = useState(
+    false
+  );
   const [isEmailValid, setIsEmailValid] = useState(false);
+  // const [isEmailNotOccupied, setIsEmailNotOccupied] = useState(false);
   const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(false);
   const createUserData = () => {
     const userData = {
@@ -40,8 +44,12 @@ const RegistrationModal = () => {
       name={name}
       setName={setName}
       setIsUsernameNotOccupied={setIsUsernameNotOccupied}
+      isPhoneNumberNotOccupied={isPhoneNumberNotOccupied}
+      setIsPhoneNumberNotOccupied={setIsPhoneNumberNotOccupied}
       isEmailValid={isEmailValid}
       setIsEmailValid={setIsEmailValid}
+      // isEmailNotOccupied={isEmailNotOccupied}
+      // setIsEmailNotOccupied={setIsEmailNotOccupied}
       isPhoneNumberValid={isPhoneNumberValid}
       setIsPhoneNumberValid={setIsPhoneNumberValid}
     />
@@ -59,7 +67,7 @@ const RegistrationModal = () => {
     const passWordHasMinLength = password.length > 3;
     return passWordHasMinLength;
   };
-  
+
   const checkIfPasswordContainsRequiredCharacters = () => {
     let isNumberInPass = false;
     let isLowerCaseInPass = false;
@@ -91,6 +99,7 @@ const RegistrationModal = () => {
     console.log(password);
     console.log("is email valid: " + isEmailValid);
     console.log("phone number is valid: " + isPhoneNumberValid);
+    console.log("phone number is not occupied: " + isPhoneNumberNotOccupied);
     console.log("username is not occupied: " + isUsernameNotOccupied);
     console.log("password check: ");
     console.log("are passwords the same: " + checkArePasswordsMatch());
@@ -104,10 +113,11 @@ const RegistrationModal = () => {
 
     return (
       isEmailValid &&
+      isPhoneNumberValid &&
+      isPhoneNumberNotOccupied &&
+      isUsernameNotOccupied &&
       checkArePasswordsMatch() &&
       checkIsPasswordHasMinLength() &&
-      isPhoneNumberValid &&
-      isUsernameNotOccupied &&
       checkIfPasswordContainsRequiredCharacters()
     );
   };

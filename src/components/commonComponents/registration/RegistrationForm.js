@@ -4,7 +4,6 @@ import { UserOutlined, PhoneOutlined } from "@ant-design/icons";
 import axios from "axios";
 
 const RegistrationForm = (props) => {
-
   const handleNameChange = (e) => {
     props.setName(e.target.value);
   };
@@ -19,6 +18,7 @@ const RegistrationForm = (props) => {
   const handlePhoneNumberChange = (e) => {
     props.setPhoneNumber(e.target.value);
     checkIsPhoneNumberValid(e.target.value);
+    checkIfPhoneNumberNotOccupied(e.target.value);
   };
   const handlePasswordChange = (e) => {
     props.setPassword(e.target.value);
@@ -50,7 +50,19 @@ const RegistrationForm = (props) => {
       props.setIsUsernameNotOccupied(!resp.data);
     });
   };
-
+  const checkIfPhoneNumberNotOccupied = (phoneNumber) => {
+    const options = {
+      url: "http://localhost:8080/users/exists?phoneNumber=" + phoneNumber,
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    axios(options).then((resp) => {
+      console.log("respdata " + resp.data);
+      props.setIsPhoneNumberNotOccupied(!resp.data);
+    });
+  };
   return (
     <div>
       <Row>
