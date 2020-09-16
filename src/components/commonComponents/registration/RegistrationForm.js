@@ -41,7 +41,7 @@ const RegistrationForm = (props) => {
 
   const checkIfUsernameNotOccupied = (username) => {
     const options = {
-      url: "http://localhost:8080/users/exists/" + username,
+      url: "http://localhost:8080/users/username/exists?username=" + username,
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const RegistrationForm = (props) => {
   };
   const checkIfPhoneNumberNotOccupied = (phoneNumber) => {
     const options = {
-      url: "http://localhost:8080/users/exists?phoneNumber=" + phoneNumber,
+      url: "http://localhost:8080/users/phoneNumber/exists?phoneNumber=" + phoneNumber,
       method: "GET",
       headers: {
         "Content-Type": "application/json",
