@@ -14,6 +14,7 @@ const RegistrationForm = (props) => {
   const handleEmailChange = (e) => {
     props.setEmail(e.target.value);
     checkIsEmailValid(e.target.value);
+    checkIfEmailIsNotOccupied(e.target.value);
   };
   const handlePhoneNumberChange = (e) => {
     props.setPhoneNumber(e.target.value);
@@ -59,10 +60,23 @@ const RegistrationForm = (props) => {
       },
     };
     axios(options).then((resp) => {
-      console.log("respdata " + resp.data);
       props.setIsPhoneNumberNotOccupied(!resp.data);
     });
   };
+  const checkIfEmailIsNotOccupied = (email) => {
+    const options = {
+      url: "http://localhost:8080/users/email/exists?email=" + email,
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    axios(options).then((resp) => {
+      console.log("respdata:" + resp.data);
+      props.setIsEmailNotOccupied(!resp.data);
+    });
+  };
+
   return (
     <div>
       <Row>

@@ -16,7 +16,7 @@ const RegistrationModal = () => {
     false
   );
   const [isEmailValid, setIsEmailValid] = useState(false);
-  // const [isEmailNotOccupied, setIsEmailNotOccupied] = useState(false);
+  const [isEmailNotOccupied, setIsEmailNotOccupied] = useState(false);
   const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(false);
   const createUserData = () => {
     const userData = {
@@ -48,8 +48,8 @@ const RegistrationModal = () => {
       setIsPhoneNumberNotOccupied={setIsPhoneNumberNotOccupied}
       isEmailValid={isEmailValid}
       setIsEmailValid={setIsEmailValid}
-      // isEmailNotOccupied={isEmailNotOccupied}
-      // setIsEmailNotOccupied={setIsEmailNotOccupied}
+      isEmailNotOccupied={isEmailNotOccupied}
+      setIsEmailNotOccupied={setIsEmailNotOccupied}
       isPhoneNumberValid={isPhoneNumberValid}
       setIsPhoneNumberValid={setIsPhoneNumberValid}
     />
@@ -96,8 +96,8 @@ const RegistrationModal = () => {
     return isNumberInPass && isLowerCaseInPass && isUpperCaseInPass;
   };
   const areInputsValid = () => {
-    console.log(password);
     console.log("is email valid: " + isEmailValid);
+    console.log("email is not occupied: " + isEmailNotOccupied);
     console.log("phone number is valid: " + isPhoneNumberValid);
     console.log("phone number is not occupied: " + isPhoneNumberNotOccupied);
     console.log("username is not occupied: " + isUsernameNotOccupied);
@@ -113,6 +113,7 @@ const RegistrationModal = () => {
 
     return (
       isEmailValid &&
+      isEmailNotOccupied &&
       isPhoneNumberValid &&
       isPhoneNumberNotOccupied &&
       isUsernameNotOccupied &&
