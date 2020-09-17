@@ -9,6 +9,7 @@ import Contact from "./components/pages/contact/Contact";
 import Header from "./components/commonComponents/Header";
 import ActiveOrders from "./components/pages/activeOrders/ActiveOrders";
 import { WorkerProvider } from "./components/context/WorkerContext";
+import  ManageUsers  from "./components/pages/manageUsers/ManageUsers";
 
 function App() {
   //sets the backround color to grey;
@@ -27,6 +28,7 @@ function App() {
                 </PizzaProvider>
                 <Route path="/contact" component={Contact} />
                 <Route path="/orders/active" component={ActiveOrders} />
+                <Route path="/manage/users" component={ManageUsers} />
               </CartProvider>
             </ActiveOrderProvider>
           </WorkerProvider>

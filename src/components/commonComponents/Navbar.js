@@ -30,6 +30,14 @@ const Navbar = () => {
           </Button>
         </Link>
       )}
+
+    {LoggedInAsRole === "ROLE_MANAGER" ? (
+        <Link className="link" to="/manage/users">
+          <Button size={"large"} onClick={handleClick}>
+            <b>Manage users</b>
+          </Button>
+        </Link>
+      ):null}
     </div>
   );
 };
